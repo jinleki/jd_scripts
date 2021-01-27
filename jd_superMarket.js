@@ -5,7 +5,8 @@
  * @Last Modified time: 2021-1-22 21:22:37
  */
 /*
-东东超市(活动入口：京东APP-》首页-》京东超市-》底部东东超市)
+东东超市
+活动入口：京东APP首页-京东超市-底部东东超市
 Some Functions Modified From https://github.com/Zero-S1/JD_tools/blob/master/JD_superMarket.py
 支持京东双账号
 东东超市兑换奖品请使用此脚本 https://raw.githubusercontent.com/LXK9301/jd_scripts/master/jd_blueCoin.js
