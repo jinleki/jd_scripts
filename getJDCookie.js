@@ -1,9 +1,5 @@
 /**
- * 扫码获取京东cookie，此方式得到的cookie有效期为90天(实际待测试)
- * @Author: LXK9301 https://github.com/LXK9301
- * @Date: 2021-01-13 12:12:40
- * @Last Modified by: LXK9301
- * @Last Modified time: 2021-01-13 12:22:54
+ * 扫码获取京东cookie，此方式得到的cookie有效期为30天
  * Modify from FanchangWang https://github.com/FanchangWang
  */
 const $ = new Env('扫码获取京东cookie');
@@ -61,6 +57,7 @@ function generateQrcode() {
           const url = 'https://plogin.m.jd.com/cgi-bin/m/tmauth?appid=300&client_type=m&token=' + token;
           qrcode.generate(url, {small: true}); // 输出二维码
           console.log("请打开 京东APP 扫码登录(二维码有效期为3分钟)");
+          console.log(`\n\n注：如扫描不到，请使用工具(例如在线二维码工具：https://cli.im)手动生成如下url二维码\n\n${url}\n\n`);
         }
       } catch (e) {
         $.logErr(e, resp)
@@ -135,8 +132,8 @@ function formatCookie(headers) {
     pt_pin = pt_pin.substring(pt_pin.indexOf("=") + 1, pt_pin.indexOf(";"))
     const cookie1 = "pt_key=" + pt_key + ";pt_pin=" + pt_pin + ";";
 
-    $.UserName = decodeURIComponent(cookie1.match(/pt_pin=(.+?);/) && cookie1.match(/pt_pin=(.+?);/)[1])
-    $.log(`京东用户：${$.UserName} Cookie获取成功(有效期：${headers['strict-transport-security'].substring("max-age=7776000".indexOf('=') + 1, "max-age=7776000".length)}秒)，cookie如下：`);
+    $.UserName = decodeURIComponent(cookie1.match(/pt_pin=([^; ]+)(?=;?)/) && cookie1.match(/pt_pin=([^; ]+)(?=;?)/)[1])
+    $.log(`京东用户：${$.UserName} Cookie获取成功，cookie如下：`);
     $.log(`\n${cookie1}\n`);
     resolve()
   })
